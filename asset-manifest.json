@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.38306ceb.chunk.css",
+    "main.js": "/static/js/main.749569a7.chunk.js",
+    "main.js.map": "/static/js/main.749569a7.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.475d589c.js",
+    "runtime-main.js.map": "/static/js/runtime-main.475d589c.js.map",
+    "static/js/2.c688ab1c.chunk.js": "/static/js/2.c688ab1c.chunk.js",
+    "static/js/2.c688ab1c.chunk.js.map": "/static/js/2.c688ab1c.chunk.js.map",
+    "static/js/3.0f18a086.chunk.js": "/static/js/3.0f18a086.chunk.js",
+    "static/js/3.0f18a086.chunk.js.map": "/static/js/3.0f18a086.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.38306ceb.chunk.css.map": "/static/css/main.38306ceb.chunk.css.map",
+    "static/js/2.c688ab1c.chunk.js.LICENSE.txt": "/static/js/2.c688ab1c.chunk.js.LICENSE.txt",
+    "static/media/github.faf641fb.svg": "/static/media/github.faf641fb.svg",
+    "static/media/linkedIn.bd481504.svg": "/static/media/linkedIn.bd481504.svg",
+    "static/media/linkedInColor.ca579d6d.svg": "/static/media/linkedInColor.ca579d6d.svg",
+    "static/media/mail.1eabb9bd.svg": "/static/media/mail.1eabb9bd.svg",
+    "static/media/mailColor.db608043.svg": "/static/media/mailColor.db608043.svg",
+    "static/media/stackoverflow.3d7c6e2e.svg": "/static/media/stackoverflow.3d7c6e2e.svg",
+    "static/media/stackoverflowColor.1b73f3d4.svg": "/static/media/stackoverflowColor.1b73f3d4.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.475d589c.js",
+    "static/js/2.c688ab1c.chunk.js",
+    "static/css/main.38306ceb.chunk.css",
+    "static/js/main.749569a7.chunk.js"
+  ]
+}
