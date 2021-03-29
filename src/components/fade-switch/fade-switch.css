@@ -1,0 +1,20 @@
+.switch-container {
+    position: relative;
+}
+
+.switch-element {
+    opacity: 0;
+    transition: all 0.25s;
+}
+
+.new {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+}
+
+.visible {
+    opacity: 1;
+}

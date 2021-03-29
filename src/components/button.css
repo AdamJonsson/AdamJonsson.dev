@@ -1,0 +1,14 @@
+.button-container {
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: var(--theme-border-radius);
+    background-color: var(--theme-primary);
+    color: var(--theme-onPrimary);
+    font-family: 'Bungee', cursive;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.25s;
+}
+.button-container:hover {
+    background-color: var(--theme-primaryLight);
+}
