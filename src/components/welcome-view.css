@@ -1,0 +1,7 @@
+@import "../theme.css";
+
+.welcome-view-container {
+    position: relative;
+    min-height: 100vh;
+    background-color: var(--theme-background);
+}

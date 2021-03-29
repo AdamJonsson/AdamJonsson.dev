@@ -1,0 +1,29 @@
+.name-title-container {
+    font-family: 'Bungee', cursive;
+    color: var(--theme-primary);
+    font-size: 80px;
+    line-height: 0.73;
+}
+
+.first-name-row-container {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.dev-name-container {
+    flex: 1;
+}
+.dev-name-container::content {
+    content: "";
+}
+
+.dev-name {
+    height: 100%;
+    margin-left: 10px;
+    margin-right: 6px;
+    position: relative;
+    border-radius: var(--theme-border-radius);
+    font-size: 35px;
+    color: var(--theme-background);
+    background-color: var(--theme-primary);
+}

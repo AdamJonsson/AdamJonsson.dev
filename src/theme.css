@@ -1,0 +1,9 @@
+:root {
+    --theme-background: #303030;
+    --theme-primaryLight: #ffffff;
+    --theme-primary: #eeeeee;
+    --theme-primaryDark: #bbbbbb;
+    --theme-onPrimary: #303030;
+    --theme-border-radius: 3px;
+}
+  
