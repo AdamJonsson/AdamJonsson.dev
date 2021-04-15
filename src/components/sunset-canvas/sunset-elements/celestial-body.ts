@@ -1,6 +1,4 @@
-import { Color } from "../../../model/color";
 import { Coordinates } from "../../../model/coordinates";
-import { Drawable } from "../../../model/drawable";
 import { SunsetTime } from "./sunset-time";
 
 export class CelestialBody {

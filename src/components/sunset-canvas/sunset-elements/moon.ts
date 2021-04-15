@@ -30,7 +30,7 @@ export class Moon implements Drawable {
         );
         // Add three color stops
         gradient.addColorStop(0, new Color(255, 255, 255, 1).toString());
-        gradient.addColorStop(1, new Color(200, 200, 200, 1).toString());
+        gradient.addColorStop(1, new Color(255, 255, 255, 0.5).toString());
 
         // Set the fill style and draw a rectangle
         context.arc(bodyPos.x, bodyPos.y, sunRadius, 0, 2 * Math.PI, true);

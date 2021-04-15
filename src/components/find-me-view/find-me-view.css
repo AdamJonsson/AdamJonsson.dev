@@ -1,0 +1,11 @@
+.find-me-view-container {
+    position: relative;
+}
+
+.content-container {
+    padding: 10px;
+    padding-top: 100px;
+    padding-bottom: 200px;
+    max-width: 375px;
+    margin: auto;
+}

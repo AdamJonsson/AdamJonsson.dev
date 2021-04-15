@@ -1,15 +1,10 @@
-import { Color } from "../../../model/color";
-import { ColorInterpolation } from "../../../model/color-interpolation";
 import { Drawable } from "../../../model/drawable";
-import { ColorHelper } from "./color-helper";
-import { Moon } from "./moon";
-import { Stars } from "./starts";
-import { Sun } from "./sun";
 import { SunsetTime } from "./sunset-time";
+import { skyTopColors, skyBottomColors } from "./colors/sky-color";
 
 export class Sky implements Drawable {
     constructor(
-        private sunsetTime: SunsetTime
+        private sunsetTime: SunsetTime,
     ){}
 
     public draw(context: CanvasRenderingContext2D) {
@@ -19,9 +14,8 @@ export class Sky implements Drawable {
     private drawSkyGradient(context: CanvasRenderingContext2D) {
         // Create gradient
         var grd = context.createLinearGradient(context.canvas.width / 2, context.canvas.height, context.canvas.width / 2, 0);
-        
-        grd.addColorStop(0, ColorHelper.getColorFromTime(this.sunsetTime.currentTime + 0.05).toString());
-        grd.addColorStop(1, ColorHelper.getColorFromTime(this.sunsetTime.currentTime - 0.05).toString());
+        grd.addColorStop(0, skyBottomColors.getColorFromTime(this.sunsetTime.currentTime)!.toString());
+        grd.addColorStop(1, skyTopColors.getColorFromTime(this.sunsetTime.currentTime)!.toString());
 
         // Fill with gradient
         context.fillStyle = grd;

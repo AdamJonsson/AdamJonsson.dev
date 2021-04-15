@@ -33,23 +33,28 @@ class CanvasLayer {
 }
 
 const LayeredCanvas = (props: LayeredCanvasProps) => {
-  const canvasLayers = props.layers.map(layer => {
-        return new CanvasLayer(
-            React.createRef(),
-            layer.drawables
-        );
-    });
-  
+    const canvasLayers = props.layers.map(layer => {
+            return new CanvasLayer(
+                React.createRef(),
+                layer.drawables
+            );
+        }
+    );
+
   useEffect(() => {
+    const onResizeWindow = () => {
+        canvasLayers.forEach(layer => {
+            resizeCanvasLayer(layer);
+        });
+    }
+
     canvasLayers.forEach(layer => {
         layer.generateContext();
         resizeCanvasLayer(layer);
     });
-    let frameCount = 0
     let animationFrameId: number;
     
     const render = () => {
-        frameCount++
         canvasLayers.forEach(layer => {
             layer.render();
         });
@@ -61,13 +66,8 @@ const LayeredCanvas = (props: LayeredCanvasProps) => {
         window.removeEventListener('resize', onResizeWindow);
         window.cancelAnimationFrame(animationFrameId)
     }
-  }, [props.layers])
+  }, [props.layers, canvasLayers])
 
-  const onResizeWindow = () => {
-    canvasLayers.forEach(layer => {
-        resizeCanvasLayer(layer);
-    });
-  }
 
   const resizeCanvasLayer = (canvasLayer: CanvasLayer) => {
     const canvas = canvasLayer.canvasRef.current!;
@@ -75,7 +75,6 @@ const LayeredCanvas = (props: LayeredCanvasProps) => {
     
     if (canvas.width !== width || canvas.height !== height) {
       const { devicePixelRatio:ratio=1 } = window;
-      const context = canvas.getContext('2d');
       canvas.width = width*ratio;
       canvas.height = height*ratio;
       canvasLayer.context!.scale(ratio, ratio);

@@ -33,9 +33,9 @@ class Star {
     public shouldRender(context: CanvasRenderingContext2D) {
         var pos = this.pos(context);
         if (pos.x > context.canvas.width) return false;
-        if (pos.x < 0) return false;
+        if (pos.x < -context.canvas.width / 6) return false;
         if (pos.y > context.canvas.height) return false;
-        if (pos.y < 0) return false;
+        if (pos.y < -context.canvas.height / 6) return false;
         return true;
     }
 }

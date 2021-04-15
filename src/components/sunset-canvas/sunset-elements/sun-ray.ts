@@ -1,6 +1,5 @@
 import { Color } from "../../../model/color";
 import { Coordinates } from "../../../model/coordinates";
-import { Drawable } from "../../../model/drawable";
 import { SunsetTime } from "./sunset-time";
 
 export class SunRay{
@@ -31,7 +30,7 @@ export class SunRay{
             rayGradientEnd.y
         );
         
-        rayColor.addColorStop(0, new Color(255, 255, 200, 0.03).toString());
+        rayColor.addColorStop(0, new Color(255, 255, 200, 0.05).toString());
         rayColor.addColorStop(0.75, new Color(255, 255, 255, 0).toString());
 
         context.beginPath();
