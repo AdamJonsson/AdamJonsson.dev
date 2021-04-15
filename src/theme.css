@@ -1,9 +1,11 @@
 :root {
-    --theme-background: #303030;
+    --theme-background: #0d1117;
     --theme-primaryLight: #ffffff;
     --theme-primary: #eeeeee;
     --theme-primaryDark: #bbbbbb;
-    --theme-onPrimary: #303030;
+    --theme-onPrimary: #0d1117;
+    --theme-accent: rgb(51,170,255);
+    --theme-accentDark: rgb(31,120,200);
     --theme-border-radius: 3px;
 }
   
