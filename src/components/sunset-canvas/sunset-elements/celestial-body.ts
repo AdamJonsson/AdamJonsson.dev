@@ -1,5 +1,7 @@
 import { Coordinates } from "../../../model/coordinates";
 import { SunsetTime } from "./sunset-time";
+import * as PIXI from 'pixi.js';
+import { PixiHelper } from "../../pixi/pixi-canvas";
 
 export class CelestialBody {
     constructor(
@@ -7,10 +9,11 @@ export class CelestialBody {
         public startAngel: number,
     ){}
 
-    public getCoordinates(context: CanvasRenderingContext2D): Coordinates {
-        const orbitalRadius = context.canvas.width * 0.35;
-        var centerX = context.canvas.width / 2;
-        var centerY = context.canvas.height * 0.9;
+    public getCoordinates(app: PIXI.Application): Coordinates {
+        const dimensions = PixiHelper.getDimensions(app);
+        const orbitalRadius = dimensions.width * 0.35;
+        var centerX = dimensions.width / 2;
+        var centerY = dimensions.height * 0.9;
         var angle = Math.PI * 2 * this.sunsetTime.currentTime + Math.PI / 2 + this.startAngel;
         var sinFactor =  Math.sin(angle);
         var cosFactor =  Math.cos(angle);

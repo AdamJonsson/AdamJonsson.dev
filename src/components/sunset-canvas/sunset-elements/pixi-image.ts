@@ -1,6 +1,6 @@
 import { Drawable } from "../../../model/drawable";
 
-export class CanvasImage implements Drawable {
+export class PixiImage implements Drawable {
     private image = new Image();
     private x: number = 0;
     private y: number = 0;

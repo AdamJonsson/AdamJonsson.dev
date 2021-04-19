@@ -80,7 +80,7 @@ export class LandscapeLayer implements Drawable {
         this.drawTrees(context);
 
         context.fillStyle = "#000000";
-        context.fillRect(0, context.canvas.height - this.getScrollOffset() - 1, context.canvas.width, context.canvas.height * 3);
+        context.fillRect(0, context.canvas.height - this.getScrollOffset() - 5, context.canvas.width, context.canvas.height * 3);
             
         const color = this.createOverlayColor()!;
         context.globalCompositeOperation = "source-atop";

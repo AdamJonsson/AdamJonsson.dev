@@ -75,9 +75,9 @@ const LayeredCanvas = (props: LayeredCanvasProps) => {
     
     if (canvas.width !== width || canvas.height !== height) {
       const { devicePixelRatio:ratio=1 } = window;
-      canvas.width = width*ratio;
-      canvas.height = height*ratio;
-      canvasLayer.context!.scale(ratio, ratio);
+      canvas.width = width;
+      canvas.height = height;
+    //   canvasLayer.context!.scale(ratio, ratio);
       return true
     }
 

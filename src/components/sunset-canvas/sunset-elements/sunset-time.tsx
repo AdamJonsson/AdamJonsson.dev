@@ -1,5 +1,5 @@
 export class SunsetTime {
-    public speed = 0.00005;
+    public speed = 0.00002;
     public currentTime: number = 0.15;
     public currentTimeNoLoop: number = this.currentTime;
 
@@ -8,12 +8,18 @@ export class SunsetTime {
     }
 
     startCounter() {
+        const latency = 3;
+        var lastUpdate = Date.now();
         setInterval(() => {
-            this.currentTime += this.speed;
-            this.currentTimeNoLoop += this.speed;
+            var now = Date.now();
+            var dt = now - lastUpdate;
+            lastUpdate = Date.now();
+
+            this.currentTime += this.speed * dt;
+            this.currentTimeNoLoop += this.speed * dt;
             if (this.currentTime > 1) {
                 this.currentTime = 0;
             }
-        }, 1);
+        }, latency);
     }
 }
