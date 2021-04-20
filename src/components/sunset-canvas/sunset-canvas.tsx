@@ -4,7 +4,6 @@ import Sky from "./sunset-elements/sky";
 import { SunsetTime } from "./sunset-elements/sunset-time";
 import { Moon } from "./sunset-elements/moon";
 import { Sun } from "./sunset-elements/sun";
-// import { Stars } from "./sunset-elements/starts";
 
 import mountainsBack from "../../assets/sunset/landscape/mountainsBack.png";
 import { mountainsBackColor } from "./sunset-elements/colors/mountains-back-color";
@@ -23,6 +22,7 @@ import PixiCanvas, { PixiDrawable } from "../pixi/pixi-canvas";
 import { LandscapeLayer } from "./sunset-elements/landscape-layer";
 import { Name } from "./sunset-elements/name";
 import { Stars } from "./sunset-elements/stars";
+import { Clouds } from "./sunset-elements/clouds";
 
 export const SunsetCanvas: FunctionComponent = ({ children }) => {
     const time = new SunsetTime();
@@ -32,6 +32,7 @@ export const SunsetCanvas: FunctionComponent = ({ children }) => {
         new Stars(time),
         new Moon(time),
         new Sun(time),
+        new Clouds(time),
         new LandscapeLayer({
             sunsetTime: time,
             pathOfImage: mountainsBack,
