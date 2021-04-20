@@ -1,19 +1,14 @@
 export class SunsetTime {
-    public speed = 0.00005;
+    public speed = 0.000015;
     public currentTime: number = 0.15;
     public currentTimeNoLoop: number = this.currentTime;
 
-    constructor() {
-        this.startCounter();
+    updateTime(deltaMS: number) {
+        this.currentTime += this.speed * deltaMS;
+        this.currentTimeNoLoop += this.speed * deltaMS;
+        if (this.currentTime > 1) {
+            this.currentTime = 0;
+        }
     }
 
-    startCounter() {
-        setInterval(() => {
-            this.currentTime += this.speed;
-            this.currentTimeNoLoop += this.speed;
-            if (this.currentTime > 1) {
-                this.currentTime = 0;
-            }
-        }, 1);
-    }
 }

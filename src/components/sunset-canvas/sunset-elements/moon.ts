@@ -1,63 +1,37 @@
-import { Color } from "../../../model/color";
-import { Coordinates } from "../../../model/coordinates";
-import { Drawable } from "../../../model/drawable";
+import { PixiDrawable, PixiHelper } from "../../pixi/pixi-canvas";
 import { CelestialBody } from "./celestial-body";
 import { SunsetTime } from "./sunset-time";
+import moonTextureImage from "../../../assets/sunset/landscape/moon.png";
+import * as PIXI from 'pixi.js';
 
-export class Moon implements Drawable {
+export class Moon extends PixiDrawable {
     public body: CelestialBody;
+    private moonSprite: PIXI.Sprite | null = null;
     constructor(public sunsetTime: SunsetTime) {
+        super();
         this.body = new CelestialBody(sunsetTime, Math.PI);
     }
-
-    public draw (context: CanvasRenderingContext2D) {
-        var bodyPos = this.body.getCoordinates(context);
-        this.drawMoonLight(context, bodyPos);
-        this.drawMoon(context, bodyPos);
-    };
-
-    private drawMoon(context: CanvasRenderingContext2D, bodyPos: Coordinates) {
-        var sunRadius = context.canvas.width * 0.02;
-
-        context.beginPath();
-        var gradient = context.createRadialGradient(
-            bodyPos.x, 
-            bodyPos.y, 
-            sunRadius * 0.5, 
-            bodyPos.x,
-            bodyPos.y, 
-            sunRadius,
-        );
-        // Add three color stops
-        gradient.addColorStop(0, new Color(255, 255, 255, 1).toString());
-        gradient.addColorStop(1, new Color(255, 255, 255, 0.5).toString());
-
-        // Set the fill style and draw a rectangle
-        context.arc(bodyPos.x, bodyPos.y, sunRadius, 0, 2 * Math.PI, true);
-        context.fillStyle = gradient;
-        context.fill();
-        context.closePath();
-    } 
-
-    public drawMoonLight(context: CanvasRenderingContext2D, bodyPos: Coordinates) {
-        context.beginPath();
-        var lightRadius = context.canvas.width * 0.25;
-        var gradient = context.createRadialGradient(
-            bodyPos.x, 
-            bodyPos.y, 
-            0, 
-            bodyPos.x,
-            bodyPos.y, 
-            lightRadius,
-        );
-        // Add three color stops
-        gradient.addColorStop(0, new Color(255, 255, 255, 0.1).toString());
-        gradient.addColorStop(1, new Color(255, 255, 255, 0).toString());
-
-        // Set the fill style and draw a rectangle
-        context.arc(bodyPos.x, bodyPos.y, lightRadius, 0, 2 * Math.PI, true);
-        context.fillStyle = gradient;
-        context.fill();
-        context.closePath();
+    
+    public onAttachApp(): void {
+        const moonTexture =  PixiHelper.getTexture(moonTextureImage, this.app!);
+        this.moonSprite = new PIXI.Sprite(moonTexture);
+        this.app?.stage.addChild(this.moonSprite);
     }
+
+    public textures(): string[] {
+        return [
+            moonTextureImage
+        ];
+    }
+
+    public draw () {
+        if (this.moonSprite == null) return;
+        const dimensions = PixiHelper.getMainScaleRef(this.app!);
+        var bodyPos = this.body.getCoordinates(this.app!);
+        this.moonSprite.x = bodyPos.x;
+        this.moonSprite.y = bodyPos.y;
+        this.moonSprite.anchor.set(0.5, 0.5);
+        this.moonSprite.width = dimensions * 0.25;
+        this.moonSprite.height = dimensions * 0.25;
+    };
 }

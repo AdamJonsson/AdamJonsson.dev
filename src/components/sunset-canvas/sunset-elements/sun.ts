@@ -1,52 +1,62 @@
-import { Color } from "../../../model/color";
-import { Coordinates } from "../../../model/coordinates";
-import { Drawable } from "../../../model/drawable";
+import { PixiDrawable, PixiHelper } from "../../pixi/pixi-canvas";
 import { CelestialBody } from "./celestial-body";
 import { SunRay } from "./sun-ray";
 import { SunsetTime } from "./sunset-time";
-
-export class Sun implements Drawable {
+import sunTextureImage from "../../../assets/sunset/landscape/sun.png";
+import sunrayTextureImage from "../../../assets/sunset/landscape/sunray.png";
+import * as PIXI from 'pixi.js';
+export class Sun extends PixiDrawable {
     public body: CelestialBody;
     public sunRays: SunRay[] = [];
+    private sunSprite: PIXI.Sprite | null = null;
     constructor(public sunsetTime: SunsetTime) {
+        super();
         this.body = new CelestialBody(sunsetTime, 0);
-        for (let index = 0; index < 25; index++) {
-            this.sunRays.push(new SunRay(sunsetTime));
-        }
     }
 
-    public draw (context: CanvasRenderingContext2D) {
-        var bodyPos = this.body.getCoordinates(context);
-        this.drawSunRays(context, bodyPos);
-        this.drawSun(context, bodyPos);
+    public draw () {
+        if (this.sunSprite == null) return;
+        const scale = PixiHelper.getMainScaleRef(this.app!);
+        var bodyPos = this.body.getCoordinates(this.app!);
+        this.sunSprite.x = bodyPos.x;
+        this.sunSprite.y = bodyPos.y;
+        this.sunSprite.anchor.set(0.5, 0.5);
+        this.sunSprite.width = scale * 0.05;
+        this.sunSprite.height = scale * 0.05;
+        this.drawSunRays();
     };
 
-    private drawSun(context: CanvasRenderingContext2D, bodyPos: Coordinates) {
-        var sunRadius = context.canvas.width * 0.025;
+    public onAttachApp(): void {
+        const sunTexture = PixiHelper.getTexture(sunTextureImage, this.app!);
+        const sunrayTexture = PixiHelper.getTexture(sunrayTextureImage, this.app!);
+        this.sunSprite = new PIXI.Sprite(sunTexture);
+        this.app?.stage.addChild(this.sunSprite);
 
-        context.beginPath();
-        var gradient = context.createRadialGradient(
-            bodyPos.x, 
-            bodyPos.y, 
-            sunRadius * 0.5, 
-            bodyPos.x,
-            bodyPos.y, 
-            sunRadius,
-        );
-        // Add three color stops
-        gradient.addColorStop(0, new Color(255, 255, 255, 1).toString());
-        gradient.addColorStop(1, new Color(255, 255, 255, 0.5).toString());
+        const numOfSunRays = 40;
+        const sunrayContainer = new PIXI.ParticleContainer(numOfSunRays, {
+            scale: true,
+            position: true,
+            rotation: true,
+            uvs: true,
+            alpha: true
+        });
+        for (let index = 0; index < numOfSunRays; index++) {
+            this.sunRays.push(new SunRay(this.sunsetTime, this.app!, sunrayContainer, sunrayTexture));
+        }
+        this.app?.stage.addChild(sunrayContainer);
+    }
 
-        // Set the fill style and draw a rectangle
-        context.arc(bodyPos.x, bodyPos.y, sunRadius, 0, 2 * Math.PI, true);
-        context.fillStyle = gradient;
-        context.fill();
-        context.closePath();
-    } 
+    public textures(): string[] {
+        return [
+            sunTextureImage,
+            sunrayTextureImage
+        ];
+    }
 
-    public drawSunRays(context: CanvasRenderingContext2D, bodyPos: Coordinates) {
+    public drawSunRays() {
+        const coordinates = this.body.getCoordinates(this.app!);
         this.sunRays.forEach(sunRay => {
-            sunRay.draw(context, bodyPos);
+            sunRay.draw(coordinates);
         });
     }
 }
