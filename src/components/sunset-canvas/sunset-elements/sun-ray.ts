@@ -17,11 +17,10 @@ export class SunRay{
         this.sunraySprite = new PIXI.Sprite(this.sunrayTexture);
         this.sunraySprite.anchor.set(0.5, 1);
         const scale = PixiHelper.getMainScaleRef(this.app!);
-        const length = scale * 0.4;
+        const length = scale * 0.5;
         this.sunraySprite.width = length * 0.75;
         this.sunraySprite.height = length - length * 0.1 * Math.random();
         this.container.addChild(this.sunraySprite);
-        console.log("Sunray created");
     }
 
     public draw(bodyPos: Coordinates) {

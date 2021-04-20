@@ -34,7 +34,7 @@ export class Sun extends PixiDrawable {
         this.sunSprite = new PIXI.Sprite(sunTexture);
         this.app?.stage.addChild(this.sunSprite);
 
-        const numOfSunRays = 50;
+        const numOfSunRays = 40;
         const sunrayContainer = new PIXI.ParticleContainer(numOfSunRays, {
             scale: true,
             position: true,

@@ -4,7 +4,14 @@ import { SunsetTime } from "./sunset-time";
 import { Tree } from "./tree";
 import { CanvasImage } from "./canvas-image";
 import { ScrollData } from "./scroll-data";
+import { PixiDrawable, PixiHelper } from "../../pixi/pixi-canvas";
+import * as PIXI from 'pixi.js';
 
+import tree1 from "../../../assets/sunset/landscape/tree1.png";
+import tree2 from "../../../assets/sunset/landscape/tree2.png";
+import tree3 from "../../../assets/sunset/landscape/tree3.png";
+import tree4 from "../../../assets/sunset/landscape/tree4.png";
+import tree5 from "../../../assets/sunset/landscape/tree5.png";
 export interface LandscapeLayerParameters {
     sunsetTime: SunsetTime, 
     pathOfImage: string,
@@ -15,10 +22,12 @@ export interface LandscapeLayerParameters {
     treeSize: number,
     scrollData: ScrollData,
     scrollParallaxFactor: number,
+    coverBelow?: boolean,
 }
 
-export class LandscapeLayer implements Drawable {
-    public landscapeImage: CanvasImage;
+export class LandscapeLayer extends PixiDrawable {
+
+    public landscapeSprite: PIXI.Sprite | null = null;
     public trees: Tree[] = [];
     public sunsetTime: SunsetTime;
     public pathOfImage: string;
@@ -29,8 +38,11 @@ export class LandscapeLayer implements Drawable {
     private treeSize: number;
     private scrollData: ScrollData;
     private scrollParallaxFactor: number;
+    private coverBelow: boolean;
+    private coverSprite: PIXI.Sprite | null = null;
 
     constructor(param: LandscapeLayerParameters) {
+        super();
         this.sunsetTime = param.sunsetTime;
         this.pathOfImage = param.pathOfImage;
         this.color = param.color;
@@ -38,10 +50,31 @@ export class LandscapeLayer implements Drawable {
         this.treeMaxYPos = param.treeMaxYPos;
         this.treeMinYPos = param.treeMinYPos;
         this.treeSize = param.treeSize;
-        this.landscapeImage = new CanvasImage(this.pathOfImage);
         this.scrollData = param.scrollData;
         this.scrollParallaxFactor = param.scrollParallaxFactor;
+        this.coverBelow = param.coverBelow ?? false;
+    }
+
+    public onAttachApp(): void {
         this.createTrees();
+        const landscapeTexture = this.app!.loader.resources[this.pathOfImage].texture!;
+        this.landscapeSprite = new PIXI.Sprite(landscapeTexture);
+        this.app!.stage.addChild(this.landscapeSprite);
+        
+        if (this.coverBelow) {
+            this.coverSprite = new PIXI.Sprite(PIXI.Texture.WHITE);
+            this.app!.stage.addChild(this.coverSprite);
+        }
+    }
+    public textures(): string[] {
+        return [
+            this.pathOfImage,
+            tree1,
+            tree2,
+            tree3,
+            tree4,
+            tree5,
+        ]
     }
 
     private createTrees() {
@@ -50,49 +83,49 @@ export class LandscapeLayer implements Drawable {
             const width = this.treeSize + Math.random() * this.treeSize * 0.25;
             const height = width * (2 + Math.random());
             this.trees.push(new Tree(
+                this.app!,
                 randXPos,
                 this.treeMinYPos + (this.treeMaxYPos - this.treeMinYPos) * Math.random(),
                 width,
                 height,
-                Math.random() * 0.004,
+                0.0001 + Math.random() * 0.0002,
                 this.sunsetTime
             ));
         }
-    }
-
-    private createOverlayColor() {
-        return this.color.getColorFromTime(this.sunsetTime.currentTime);
     }
 
     private getScrollOffset() {
         return this.scrollData.currentScroll * this.scrollParallaxFactor;
     }
 
-    public draw (context: CanvasRenderingContext2D) {
-        if (!this.landscapeImage.hasLoaded) return;
-        this.landscapeImage.setSize({width: context.canvas.width});
-        this.landscapeImage.setPosition(
-            0, 
-            context.canvas.height - this.landscapeImage.height - this.getScrollOffset()
-        );
-        
-        this.landscapeImage.draw(context);
-        this.drawTrees(context);
+    public draw() {
+        if (this.landscapeSprite == null) return;
+        const dimensions = PixiHelper.getDimensions(this.app!);
+        const scrollOffset = this.getScrollOffset();
 
-        context.fillStyle = "#000000";
-        context.fillRect(0, context.canvas.height - this.getScrollOffset() - 5, context.canvas.width, context.canvas.height * 3);
-            
-        const color = this.createOverlayColor()!;
-        context.globalCompositeOperation = "source-atop";
-        context.fillStyle = color.toString();
-        context.fillRect(0, 0, context.canvas.width, context.canvas.height);
-        context.globalCompositeOperation = "source-over";
+        this.landscapeSprite.width = dimensions.width;
+        this.landscapeSprite.anchor.set(0, 1);
+        this.landscapeSprite.y = dimensions.height - scrollOffset;
+        this.landscapeSprite.tint = this.color.getColorFromTime(this.sunsetTime.currentTime)!.tintColor();
+        this.landscapeSprite.scale.set(
+            this.landscapeSprite.scale.x,
+        );
+
+        if (this.coverSprite != null) {
+            this.coverSprite!.x = 0;
+            this.coverSprite!.y = dimensions.height - scrollOffset;
+            this.coverSprite!.width = dimensions.width;
+            this.coverSprite!.height = dimensions.height;
+            this.coverSprite!.tint = this.landscapeSprite.tint;
+        }
+
+        this.drawTrees(this.landscapeSprite.tint);
     };
 
-    public drawTrees(context: CanvasRenderingContext2D) {
+    public drawTrees(tint: number) {
+        const scrollOffset = this.getScrollOffset();
         this.trees.forEach(tree => {
-            tree.scrollOffset = this.getScrollOffset();
-            tree.draw(context);
+            tree.draw(scrollOffset, tint);
         });
     }
 

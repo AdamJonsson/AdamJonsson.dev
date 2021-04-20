@@ -44,10 +44,11 @@ export abstract class PixiDrawable {
 }
 
 type PixiCanvasProps = {
-    drawables: PixiDrawable[]
+    drawables: PixiDrawable[],
+    onTick: (deltaMS: number) => void,
 }
 
-const PixiCanvas: FC<PixiCanvasProps> = ({drawables}) => {
+const PixiCanvas: FC<PixiCanvasProps> = ({drawables, onTick}) => {
 
     const pixiContainer = useRef<HTMLDivElement>(null);
     
@@ -55,9 +56,15 @@ const PixiCanvas: FC<PixiCanvasProps> = ({drawables}) => {
 
         const app: PIXI.Application = new PIXI.Application({
             resizeTo: window,
+            // autoDensity: true,
             // resolution: window.devicePixelRatio,
+            antialias: true,
         });
-
+        
+        // Make the screen scrollable
+        app.renderer.plugins.interaction.autoPreventDefault = false;
+        app.renderer.view.style.touchAction = 'auto';
+        
         const startLoadingTexture = () => {
             return new Promise ((resolve, reject) => {
                 console.groupCollapsed("Texture loading");
@@ -66,6 +73,9 @@ const PixiCanvas: FC<PixiCanvasProps> = ({drawables}) => {
                 drawables.forEach((drawable) => {
                     textures = textures.concat(drawable.textures());
                 });
+                textures = textures.filter((texture, index) => {
+                    return textures.indexOf(texture) == index;
+                })
                 console.log("Textures that should load: ", textures);
                 const loader = app.loader.add(textures);
                 loader.load();
@@ -88,6 +98,7 @@ const PixiCanvas: FC<PixiCanvasProps> = ({drawables}) => {
             });
     
             app.ticker.add(() => {
+                onTick(app.ticker.deltaMS);
                 drawables.forEach(drawable => {
                     drawable.draw();
                 });
@@ -101,7 +112,7 @@ const PixiCanvas: FC<PixiCanvasProps> = ({drawables}) => {
             pixiContainer.current!.appendChild(app.view);
         }
         settingUpCanvas();
-    }, [drawables])
+    }, [drawables, onTick])
 
     return (
         <div ref={pixiContainer}></div>

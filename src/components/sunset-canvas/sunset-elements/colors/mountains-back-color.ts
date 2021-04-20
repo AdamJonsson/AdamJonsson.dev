@@ -1,11 +1,11 @@
 import { Color } from "../../../../model/color";
 import { ColorTransition, ColorTransitions } from "../color-transition";
 
-const visibleHighlight = 0.85;
-const nightColor = new Color(25, 35, 60, visibleHighlight + 0.1);
-const lateDawnColor = new Color(93, 45, 49, visibleHighlight);
-const earlyDawnColor = new Color(200, 129, 75, visibleHighlight);
-const dayColor = new Color(89, 125, 180, visibleHighlight);
+const visibleHighlight = 1.2;
+const nightColor = new Color(35, 45, 70,1);
+const lateDawnColor = new Color(110, 55, 59,1);
+const earlyDawnColor = new Color(210, 139, 85,1);
+const dayColor = new Color(100, 135, 190,1);
 
 export const mountainsBackColor = new ColorTransitions(
     [
