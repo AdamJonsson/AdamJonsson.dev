@@ -1,30 +1,30 @@
-import { Color } from "../../../model/color";
 import { Coordinates } from "../../../model/coordinates";
-import { Drawable } from "../../../model/drawable";
 import { LinearInterpolation } from "../../../model/linear-interpolation";
 import { SunsetTime } from "./sunset-time";
 import * as PIXI from 'pixi.js';
 import { PixiDrawable, PixiHelper } from "../../pixi/pixi-canvas";
-import { start } from "node:repl";
-import { graphicsUtils } from "pixi.js";
+import starTextureImage from "../../../assets/sunset/landscape/star.png";
 
 class Star {
-    public linesToStars: Star[] = [];
     public linesToStarsGraphics: PIXI.Graphics[] = [];
-    private starGraphics: PIXI.Graphics;
+    private starSprite: PIXI.Sprite;
+    public maxOpacity: number;
 
     constructor(
         private time: SunsetTime,
         private startAngle: number,
         private radius: number,
+        starTexture: PIXI.Texture,
+        container: PIXI.ParticleContainer,
         private app: PIXI.Application,
     ){
-        this.starGraphics = new PIXI.Graphics();
+        this.starSprite = new PIXI.Sprite(starTexture);
         const scale = PixiHelper.getMainScaleRef(this.app);
-        this.starGraphics.beginFill(0xffffff);
-        this.starGraphics.drawCircle(0, 0, scale * 0.0010);
-        this.starGraphics.endFill();
-        app.stage.addChild(this.starGraphics)
+        const size = scale * 0.002;
+        this.starSprite.width = size;
+        this.starSprite.height = size;
+        this.maxOpacity = 0.25 + 0.75 * Math.random();
+        container.addChild(this.starSprite)
     }
 
     public pos() {
@@ -41,41 +41,11 @@ class Star {
     public draw(opacity: number) {
         if (!this.shouldRender()) return;
         const pos = this.pos();
-        this.starGraphics.x = pos.x;
-        this.starGraphics.y = pos.y;
-        this.starGraphics.alpha = opacity;
-        this.drawLinesToStars(opacity);
+        this.starSprite.x = pos.x;
+        this.starSprite.y = pos.y;
+        this.starSprite.alpha = Math.min(opacity, this.maxOpacity);
     }
 
-    private drawLinesToStars(opacity: number) {
-        const starFromPos = this.pos();
-        const scale = PixiHelper.getMainScaleRef(this.app);
-        for (let index = 0; index < this.linesToStars.length; index++) {
-            const starTo = this.linesToStars[index];
-            const graphic = this.linesToStarsGraphics[index];
-            graphic.visible = opacity != 0;
-            
-            if (opacity == 0) {
-                return;
-            }
-
-            const starToPos = starTo.pos();
-            graphic.clear()
-                .lineStyle(scale * 0.001, 0xFFFFFF)
-                .moveTo(starFromPos.x, starFromPos.y)
-                .lineTo(starToPos.x, starToPos.y);
-            graphic.alpha = Math.min(0.1, opacity);
-        }
-    }
-
-    public createLinesToStars(stars: Star[]) {
-        this.linesToStars = stars;
-        for (let index = 0; index < stars.length; index++) {
-            const lineGraphic = new PIXI.Graphics(new PIXI.GraphicsGeometry());
-            this.app.stage.addChild(lineGraphic);
-            this.linesToStarsGraphics.push(lineGraphic);
-        }
-    }
 
     public getFactorPos() {
         return new Coordinates(
@@ -107,21 +77,34 @@ export class Stars extends PixiDrawable{
     }
 
     public textures(): string[] {
-        return [];
+        return [
+            starTextureImage,
+        ];
     }
 
     private createStars() {
-        const numberOfStars = 400;
+        const starTexture = PixiHelper.getTexture(starTextureImage, this.app!);
+        const numberOfStars = 1000;
+        const starContainer = new PIXI.ParticleContainer(numberOfStars, {
+            scale: true,
+            position: true,
+            alpha: true,
+            rotation: false,
+            tint: false
+        });
         for (let index = 0; index < numberOfStars; index++) {
             this.stars.push(
                 new Star(
                     this.sunsetTime,
                     Math.random() * Math.PI * 2,
                     1 - Math.pow(Math.random(), 2),
+                    starTexture,
+                    starContainer,
                     this.app!,
                 )
             );
         }
+        this.app!.stage.addChild(starContainer);
     }
 
     public draw() {

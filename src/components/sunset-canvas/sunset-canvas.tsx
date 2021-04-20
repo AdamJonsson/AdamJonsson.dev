@@ -1,7 +1,5 @@
 import React, { FunctionComponent, useEffect } from "react"
-// import LayeredCanvas, { CanvasLayerProps } from "../layered-canvas/layered-canvas";
 import "./sunset-canvas.css";
-// import { LandscapeLayer } from "./sunset-elements/landscape-layer";
 import Sky from "./sunset-elements/sky";
 import { SunsetTime } from "./sunset-elements/sunset-time";
 import { Moon } from "./sunset-elements/moon";
@@ -24,7 +22,7 @@ import { ScrollData } from "./sunset-elements/scroll-data";
 import PixiCanvas, { PixiDrawable } from "../pixi/pixi-canvas";
 import { LandscapeLayer } from "./sunset-elements/landscape-layer";
 import { Name } from "./sunset-elements/name";
-import { Stars } from "./sunset-elements/starts";
+import { Stars } from "./sunset-elements/stars";
 
 export const SunsetCanvas: FunctionComponent = ({ children }) => {
     const time = new SunsetTime();

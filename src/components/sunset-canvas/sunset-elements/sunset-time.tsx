@@ -3,8 +3,6 @@ export class SunsetTime {
     public currentTime: number = 0.15;
     public currentTimeNoLoop: number = this.currentTime;
 
-    constructor() {}
-
     updateTime(deltaMS: number) {
         this.currentTime += this.speed * deltaMS;
         this.currentTimeNoLoop += this.speed * deltaMS;

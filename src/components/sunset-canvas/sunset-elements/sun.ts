@@ -27,8 +27,6 @@ export class Sun extends PixiDrawable {
     };
 
     public onAttachApp(): void {
-        console.log("Attach");
-        const dimensions = PixiHelper.getDimensions(this.app!);
         const sunTexture = PixiHelper.getTexture(sunTextureImage, this.app!);
         const sunrayTexture = PixiHelper.getTexture(sunrayTextureImage, this.app!);
         this.sunSprite = new PIXI.Sprite(sunTexture);

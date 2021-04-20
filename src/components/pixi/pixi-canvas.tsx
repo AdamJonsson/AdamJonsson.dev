@@ -74,7 +74,7 @@ const PixiCanvas: FC<PixiCanvasProps> = ({drawables, onTick}) => {
                     textures = textures.concat(drawable.textures());
                 });
                 textures = textures.filter((texture, index) => {
-                    return textures.indexOf(texture) == index;
+                    return textures.indexOf(texture) === index;
                 })
                 console.log("Textures that should load: ", textures);
                 const loader = app.loader.add(textures);
@@ -104,10 +104,6 @@ const PixiCanvas: FC<PixiCanvasProps> = ({drawables, onTick}) => {
                 });
             });
     
-            // setInterval(() => {
-            //     console.log("FPS: " + app.ticker.FPS);
-            // }, 200);
-            
             pixiContainer.current!.innerHTML = "";
             pixiContainer.current!.appendChild(app.view);
         }

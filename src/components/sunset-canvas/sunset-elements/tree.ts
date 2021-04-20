@@ -1,12 +1,13 @@
-import { Drawable } from "../../../model/drawable";
 import { SunsetTime } from "./sunset-time";
+import * as PIXI from 'pixi.js';
+import { PixiHelper } from "../../pixi/pixi-canvas";
+
 import tree1 from "../../../assets/sunset/landscape/tree1.png";
 import tree2 from "../../../assets/sunset/landscape/tree2.png";
 import tree3 from "../../../assets/sunset/landscape/tree3.png";
 import tree4 from "../../../assets/sunset/landscape/tree4.png";
 import tree5 from "../../../assets/sunset/landscape/tree5.png";
-import * as PIXI from 'pixi.js';
-import { PixiHelper } from "../../pixi/pixi-canvas";
+
 export class Tree {
     private currentWaveAmount = Math.random() * 2;
     public scrollOffset: number = 0;

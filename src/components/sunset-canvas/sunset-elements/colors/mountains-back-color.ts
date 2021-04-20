@@ -1,7 +1,6 @@
 import { Color } from "../../../../model/color";
 import { ColorTransition, ColorTransitions } from "../color-transition";
 
-const visibleHighlight = 1.2;
 const nightColor = new Color(35, 45, 70,1);
 const lateDawnColor = new Color(110, 55, 59,1);
 const earlyDawnColor = new Color(210, 139, 85,1);

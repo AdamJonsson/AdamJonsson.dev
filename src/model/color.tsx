@@ -21,7 +21,7 @@ export class Color {
         num = Math.max(0, num);
         num = Math.floor(num);
         var hex = num.toString(16);
-        if (hex.length == 1) {
+        if (hex.length === 1) {
             hex = "0" + hex;
         }
         return hex;

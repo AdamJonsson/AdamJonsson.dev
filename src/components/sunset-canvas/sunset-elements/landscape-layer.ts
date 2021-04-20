@@ -1,8 +1,6 @@
-import { Drawable } from "../../../model/drawable";
 import { ColorTransitions } from "./color-transition";
 import { SunsetTime } from "./sunset-time";
 import { Tree } from "./tree";
-import { CanvasImage } from "./canvas-image";
 import { ScrollData } from "./scroll-data";
 import { PixiDrawable, PixiHelper } from "../../pixi/pixi-canvas";
 import * as PIXI from 'pixi.js';

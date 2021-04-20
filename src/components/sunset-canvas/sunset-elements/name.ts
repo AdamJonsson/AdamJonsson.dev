@@ -1,6 +1,4 @@
-import { Drawable } from "../../../model/drawable";
 import nameImage from "../../../assets/sunset/name.png";
-import { CanvasImage } from "./canvas-image";
 import { ScrollData } from "./scroll-data";
 import { PixiDrawable, PixiHelper } from "../../pixi/pixi-canvas";
 import * as PIXI from 'pixi.js';
