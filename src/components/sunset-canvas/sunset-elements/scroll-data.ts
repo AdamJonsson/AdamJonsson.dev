@@ -1,3 +1,3 @@
 export class ScrollData {
-    public currentScroll = 0;;
+    public currentScroll = 0;
 }

@@ -59,6 +59,7 @@ const PixiCanvas: FC<PixiCanvasProps> = ({drawables, onTick}) => {
             // autoDensity: true,
             // resolution: window.devicePixelRatio,
             antialias: true,
+            backgroundAlpha: 1,
         });
         
         // Make the screen scrollable
@@ -103,7 +104,7 @@ const PixiCanvas: FC<PixiCanvasProps> = ({drawables, onTick}) => {
                     drawable.draw();
                 });
             });
-    
+
             pixiContainer.current!.innerHTML = "";
             pixiContainer.current!.appendChild(app.view);
         }
