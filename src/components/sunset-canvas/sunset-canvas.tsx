@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from "react"
+import React, { FunctionComponent, useEffect, } from "react"
 import "./sunset-canvas.css";
 import Sky from "./sunset-elements/sky";
 import { SunsetTime } from "./sunset-elements/sunset-time";
@@ -27,6 +27,7 @@ import { Clouds } from "./sunset-elements/clouds";
 export const SunsetCanvas: FunctionComponent = ({ children }) => {
     const time = new SunsetTime();
     const scrollData = new ScrollData();
+
     const drawables: PixiDrawable[] = [
         new Sky(time),
         new Stars(time),

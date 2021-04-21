@@ -11,7 +11,8 @@ export class PixiHelper {
 
     static getMainScaleRef(app: PIXI.Application) {
         const dimensions = PixiHelper.getDimensions(app);
-        return Math.max(dimensions.width, dimensions.height);
+        const extraScaling = dimensions.height > dimensions.width ? 1.5 : 1;
+        return Math.max(dimensions.width, dimensions.height) * extraScaling;
     }
 
     static createCanvas(app: PIXI.Application) {
@@ -56,8 +57,6 @@ const PixiCanvas: FC<PixiCanvasProps> = ({drawables, onTick}) => {
 
         const app: PIXI.Application = new PIXI.Application({
             resizeTo: window,
-            // autoDensity: true,
-            // resolution: window.devicePixelRatio,
             antialias: true,
             backgroundAlpha: 1,
         });

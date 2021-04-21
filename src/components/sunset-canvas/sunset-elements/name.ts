@@ -26,6 +26,8 @@ export class Name extends PixiDrawable {
         if (this.nameSprite == null) return;
         const dimensions = PixiHelper.getDimensions(this.app!);
         const scale = PixiHelper.getMainScaleRef(this.app!);
+        
+
         this.nameSprite.anchor.set(0.5, 0.5);
         this.nameSprite.x = dimensions.width / 2;
         this.nameSprite.y = dimensions.height / 2 - this.scrollData.currentScroll * 0.2;
