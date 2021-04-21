@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useRef } from "react"
+import React, { FunctionComponent, useEffect, } from "react"
 import "./sunset-canvas.css";
 import Sky from "./sunset-elements/sky";
 import { SunsetTime } from "./sunset-elements/sunset-time";
