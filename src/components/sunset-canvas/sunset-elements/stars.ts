@@ -31,10 +31,11 @@ class Star {
         const dimensions = PixiHelper.getDimensions(this.app);
         var width = dimensions.width;
         var height = dimensions.height;
+        var maxRadius = (Math.max(width, height)) * 1.2;
         var angle = Math.PI * 2 * this.time.currentTimeNoLoop / 5;
         return new Coordinates(
-            this.radius * width * Math.cos(angle + this.startAngle) + width / 2,
-            this.radius * width * Math.sin(angle + this.startAngle) + height,
+            this.radius * maxRadius * Math.cos(angle + this.startAngle) + width / 2,
+            this.radius * maxRadius * Math.sin(angle + this.startAngle) + height,
         );
     }
 
