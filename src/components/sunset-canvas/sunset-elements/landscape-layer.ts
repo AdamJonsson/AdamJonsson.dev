@@ -96,17 +96,24 @@ export class LandscapeLayer extends PixiDrawable {
         return this.scrollData.currentScroll * this.scrollParallaxFactor;
     }
 
+    private getLandscapeZoom() {
+        const dimensions = PixiHelper.getDimensions(this.app!);
+        return Math.max(1, (dimensions.height / dimensions.width) * 1.5);
+    }
+
     public draw() {
         if (this.landscapeSprite == null) return;
         const dimensions = PixiHelper.getDimensions(this.app!);
         const scrollOffset = this.getScrollOffset();
 
-        this.landscapeSprite.width = dimensions.width;
-        this.landscapeSprite.anchor.set(0, 1);
         this.landscapeSprite.y = dimensions.height - scrollOffset;
+        this.landscapeSprite.x = dimensions.width / 2;
+
+        this.landscapeSprite.width = dimensions.width;
+        this.landscapeSprite.anchor.set(0.5, 1);
         this.landscapeSprite.tint = this.color.getColorFromTime(this.sunsetTime.currentTime)!.tintColor();
         this.landscapeSprite.scale.set(
-            this.landscapeSprite.scale.x,
+            this.landscapeSprite.scale.x * this.getLandscapeZoom(),
         );
 
         if (this.coverSprite != null) {
