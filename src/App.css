@@ -1,5 +1,4 @@
 .App {
-  text-align: center;
   color: var(--theme-primary);
 }
 
@@ -25,4 +24,12 @@
 ::-webkit-scrollbar-thumb {
   background: var(--theme-accent);
   background: linear-gradient(to bottom, var(--theme-accent), var(--theme-accentDark));
+}
+
+a, a:link, a:visited {
+  color: var(--theme-primary);
+}
+
+  a:active, a:hover {
+  color: var(--theme-accent);
 }

@@ -8,6 +8,10 @@
     cursor: pointer;
     user-select: none;
     transition: background-color 0.25s;
+
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
 }
 .button-container:hover {
     background-color: var(--theme-primaryLight);

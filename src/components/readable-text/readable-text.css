@@ -1,0 +1,9 @@
+.readable-text-container p {
+    line-height: 1.75;
+}
+
+.readable-text-container > h2:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    line-height: 1;
+}
