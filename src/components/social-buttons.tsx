@@ -16,16 +16,19 @@ export const SocialButtons: FunctionComponent = () => <div className="social-but
         greyImage={stackOverflowIcon}
         colorImage={stackOverflowColorIcon}
     />
+    <div className="vertical-line"></div>
     <SocialButton
         link="https://www.linkedin.com/in/adam-jonsson/"
         greyImage={linkedInIcon}
         colorImage={linkedInColorIcon}
     />
+    <div className="vertical-line"></div>
     <SocialButton
         link="https://github.com/AdamJonsson"
         greyImage={githubIcon}
         colorImage={githubIcon}
     />
+    <div className="vertical-line"></div>
     <SocialButton
         link="mailto:adamsmajl@gmail.com"
         greyImage={mailIcon}

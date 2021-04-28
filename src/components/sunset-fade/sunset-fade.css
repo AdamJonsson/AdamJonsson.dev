@@ -1,6 +1,5 @@
 .sunset-fade-container {
     height: 100%;
     background: var(--theme-background);
-    height: 5000px;
     background: linear-gradient(180deg, rgba(13,17,23,0) 0px, rgba(13,17,23,1) 300px);
 }
