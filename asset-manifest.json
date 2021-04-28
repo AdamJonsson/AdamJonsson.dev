@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.fba3dc9f.chunk.css",
-    "main.js": "/static/js/main.0a32acff.chunk.js",
-    "main.js.map": "/static/js/main.0a32acff.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.681a99c6.js",
-    "runtime-main.js.map": "/static/js/runtime-main.681a99c6.js.map",
+    "main.css": "/static/css/main.48a4ba7e.chunk.css",
+    "main.js": "/static/js/main.f92fa736.chunk.js",
+    "main.js.map": "/static/js/main.f92fa736.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.ea2ea5fc.js",
+    "runtime-main.js.map": "/static/js/runtime-main.ea2ea5fc.js.map",
     "static/js/2.33a97df4.chunk.js": "/static/js/2.33a97df4.chunk.js",
     "static/js/2.33a97df4.chunk.js.map": "/static/js/2.33a97df4.chunk.js.map",
-    "static/js/3.3f122bfb.chunk.js": "/static/js/3.3f122bfb.chunk.js",
-    "static/js/3.3f122bfb.chunk.js.map": "/static/js/3.3f122bfb.chunk.js.map",
+    "static/js/3.5a7162d9.chunk.js": "/static/js/3.5a7162d9.chunk.js",
+    "static/js/3.5a7162d9.chunk.js.map": "/static/js/3.5a7162d9.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.fba3dc9f.chunk.css.map": "/static/css/main.fba3dc9f.chunk.css.map",
+    "static/css/main.48a4ba7e.chunk.css.map": "/static/css/main.48a4ba7e.chunk.css.map",
     "static/js/2.33a97df4.chunk.js.LICENSE.txt": "/static/js/2.33a97df4.chunk.js.LICENSE.txt",
     "static/media/github.faf641fb.svg": "/static/media/github.faf641fb.svg",
     "static/media/linkedIn.bd481504.svg": "/static/media/linkedIn.bd481504.svg",
@@ -21,15 +21,16 @@
     "static/media/mountainsBack.c2f6bd2c.png": "/static/media/mountainsBack.c2f6bd2c.png",
     "static/media/mountainsFront.356c29e1.png": "/static/media/mountainsFront.356c29e1.png",
     "static/media/name.f1e1c422.png": "/static/media/name.f1e1c422.png",
+    "static/media/profilePicture.02fca50b.jpg": "/static/media/profilePicture.02fca50b.jpg",
     "static/media/stackoverflow.3d7c6e2e.svg": "/static/media/stackoverflow.3d7c6e2e.svg",
     "static/media/stackoverflowColor.1b73f3d4.svg": "/static/media/stackoverflowColor.1b73f3d4.svg",
     "static/media/sun.b0e2ce7b.png": "/static/media/sun.b0e2ce7b.png",
     "static/media/sunray.033e2b6d.png": "/static/media/sunray.033e2b6d.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.681a99c6.js",
+    "static/js/runtime-main.ea2ea5fc.js",
     "static/js/2.33a97df4.chunk.js",
-    "static/css/main.fba3dc9f.chunk.css",
-    "static/js/main.0a32acff.chunk.js"
+    "static/css/main.48a4ba7e.chunk.css",
+    "static/js/main.f92fa736.chunk.js"
   ]
 }
