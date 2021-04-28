@@ -31,7 +31,7 @@ export const AboutMeView: FunctionComponent = () =>
                                 </p>
                                 <p>
                                     On this site, you will find my social media profiles and some of the work
-                                    I have completed in conjunction with my master as well as personal projects.
+                                    I have completed in conjunction with my upcoming master as well as personal projects.
                                 </p>
                             </ReadableText>
                         </div>
