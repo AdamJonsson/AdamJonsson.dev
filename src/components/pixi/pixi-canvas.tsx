@@ -20,7 +20,6 @@ export class PixiHelper {
         const ratio = window.devicePixelRatio;
         canvas.width  = app.renderer.width / ratio;
         canvas.height = app.renderer.height / ratio;
-        console.log("App renderer: " + app.renderer.width);
         var ctx = canvas.getContext('2d');
         return ctx!;
     }
