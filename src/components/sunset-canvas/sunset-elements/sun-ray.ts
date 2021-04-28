@@ -24,8 +24,7 @@ export class SunRay{
     }
 
     public draw(bodyPos: Coordinates) {
-        this.currentAngel += this.angelSpeed;
-
+        this.currentAngel += this.angelSpeed * this.app.ticker.deltaTime;
         this.sunraySprite.rotation = this.currentAngel;
         this.sunraySprite.x = bodyPos.x;
         this.sunraySprite.y = bodyPos.y;

@@ -33,7 +33,7 @@ class Cloud {
     public update(app: PIXI.Application) {
         this.setAlphaValue();
         const dimensions = PixiHelper.getDimensions(app);
-        this.x -= dimensions.width * 0.00005 * this.vx;
+        this.x -= dimensions.width * 0.00005 * this.vx * app.ticker.deltaTime;
         if (this.x < -this.sprite.width) {
             this.x = dimensions.width;
         }
