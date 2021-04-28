@@ -86,7 +86,6 @@ export const SunsetCanvas: FunctionComponent = ({ children }) => {
 
     useEffect(() => {
         const onScrollUpdate = () => {
-            console.log(window.scrollY);
             scrollData.currentScroll = window.scrollY;
         }
     
